@@ -7,7 +7,11 @@ import lombok.Data;
 public class ResponseVo<M> {
     private int state;
     private String msg;
+    private String ImgPre;
     private M data;
+
+    private Integer nowPage;
+    private Integer totalPage;
 
     private ResponseVo() {}
 
@@ -18,10 +22,29 @@ public class ResponseVo<M> {
         return result;
     }
 
+
+
     public static<T> ResponseVo ok(String msg) {
         ResponseVo<T> result = new ResponseVo<>();
         result.setState(0);
         result.setMsg(msg);
+        return result;
+    }
+    public static<T> ResponseVo ok(String preImg, T data) {
+        ResponseVo<T> result = new ResponseVo<>();
+        result.setState(0);
+        result.setImgPre(preImg);
+        result.setData(data);
+        return result;
+    }
+
+    public static<T> ResponseVo ok(String preImg, T data, int nowPage, int totalPage) {
+        ResponseVo<T> result = new ResponseVo<>();
+        result.setState(0);
+        result.setImgPre(preImg);
+        result.setData(data);
+        result.setNowPage(nowPage);
+        result.setTotalPage(totalPage);
         return result;
     }
 

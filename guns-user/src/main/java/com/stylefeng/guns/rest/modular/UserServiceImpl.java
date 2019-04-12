@@ -2,8 +2,8 @@ package com.stylefeng.guns.rest.modular;
 
 import com.alibaba.dubbo.config.annotation.Service;
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
-import com.stylefeng.guns.api.model.UserInfoModel;
-import com.stylefeng.guns.api.model.UserModel;
+import com.stylefeng.guns.api.user.model.UserInfoModel;
+import com.stylefeng.guns.api.user.model.UserModel;
 import com.stylefeng.guns.api.user.UserAPI;
 import com.stylefeng.guns.core.util.MD5Util;
 import com.stylefeng.guns.rest.common.persistence.dao.MoocUserTMapper;

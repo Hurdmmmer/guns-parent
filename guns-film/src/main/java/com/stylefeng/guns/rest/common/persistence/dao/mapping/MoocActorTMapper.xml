@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.stylefeng.guns.rest.common.persistence.dao.MoocActorTMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.stylefeng.guns.rest.common.persistence.model.MoocActorT">
+        <id column="UUID" property="uuid" />
+        <result column="actor_name" property="actorName" />
+        <result column="actor_img" property="actorImg" />
+    </resultMap>
+    <select id="getActorByFilmId" resultType="com.stylefeng.guns.api.film.model.ActorVo">
+        SELECT
+            m.actor_img imgAddress,
+            m.actor_name directorName,
+            a.role_name roleName
+        FROM
+            mooc_film_t t
+            LEFT JOIN mooc_film_actor_t a ON a.film_id = t.uuid
+            LEFT JOIN mooc_actor_t m ON m.uuid = a.actor_id
+        WHERE
+	t.uuid = #{filmId} ;
+    </select>
+
+</mapper>

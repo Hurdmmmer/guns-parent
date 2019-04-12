@@ -1,8 +1,8 @@
 package com.stylefeng.guns.rest.modular.user;
 
 import com.alibaba.dubbo.config.annotation.Reference;
-import com.stylefeng.guns.api.model.UserInfoModel;
-import com.stylefeng.guns.api.model.UserModel;
+import com.stylefeng.guns.api.user.model.UserInfoModel;
+import com.stylefeng.guns.api.user.model.UserModel;
 import com.stylefeng.guns.api.user.UserAPI;
 import com.stylefeng.guns.rest.common.CurrentUser;
 import com.stylefeng.guns.rest.common.exception.BizExceptionEnum;

@@ -1,4 +1,4 @@
-package com.stylefeng.guns.api.model;
+package com.stylefeng.guns.api.user.model;
 
 import lombok.Data;
 

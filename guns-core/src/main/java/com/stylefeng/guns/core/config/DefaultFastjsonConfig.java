@@ -1,9 +1,6 @@
 package com.stylefeng.guns.core.config;
 
-import com.alibaba.fastjson.serializer.SerializeConfig;
-import com.alibaba.fastjson.serializer.SerializerFeature;
-import com.alibaba.fastjson.serializer.ToStringSerializer;
-import com.alibaba.fastjson.serializer.ValueFilter;
+import com.alibaba.fastjson.serializer.*;
 import com.alibaba.fastjson.support.config.FastJsonConfig;
 import com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
@@ -58,7 +55,8 @@ public class DefaultFastjsonConfig {
             }
         };
         fastJsonConfig.setCharset(Charset.forName("utf-8"));
-        fastJsonConfig.setSerializeFilters(valueFilter);
+//        fastJsonConfig.setSerializeFilters(valueFilter);
+        fastJsonConfig.setSerializerFeatures(SerializerFeature.WriteNullListAsEmpty);
 
         //解决Long转json精度丢失的问题
         SerializeConfig serializeConfig = SerializeConfig.globalInstance;
