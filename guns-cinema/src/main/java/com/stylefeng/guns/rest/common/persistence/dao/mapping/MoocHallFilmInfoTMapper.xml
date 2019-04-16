@@ -13,5 +13,48 @@
         <result column="actors" property="actors" />
         <result column="img_address" property="imgAddress" />
     </resultMap>
+    <resultMap id="findCinemaFilmMap" type="com.stylefeng.guns.api.cinema.model.FilmInfoVo">
+        <result column="film_id" property="filmId"/>
+        <result column="film_language" property="filmType"/>
+        <result column="film_name" property="filmName"/>
+        <result column="film_cats" property="filmCats"/>
+        <result column="film_length" property="filmLength"/>
+        <result column="actors" property="actors"/>
+        <collection property="filmFields" ofType="com.stylefeng.guns.api.cinema.model.FilmFieldVo">
+            <result property="beginTime" column="begin_time"/>
+            <result property="endTime" column="end_time"/>
+            <result property="fieldId" column="uuid"/>
+            <result property="hallName" column="hall_name"/>
+            <result property="price" column="price"/>
+            <result property="language" column="film_language"/>
+        </collection>
+
+    </resultMap>
+    <select id="findCinemaFilm" resultMap="findCinemaFilmMap">
+        SELECT
+            info.film_id ,
+            info.film_name ,
+            info.film_language ,
+            info.film_cats ,
+            info.film_length,
+            info.actors,
+            info.UUID,
+            field.begin_time,
+            field.end_time,
+            field.price,
+            field.hall_name
+        FROM
+            mooc_hall_film_info_t info,
+            mooc_field_t field
+        WHERE
+            info.film_id = field.film_id
+            AND
+            field.cinema_id = ${cinemaId}
+    </select>
+    <select id="findFilmById" resultType="com.stylefeng.guns.api.cinema.model.FilmInfoVo">
+      SELECT film_id AS filmId, film_name AS filmName,
+       film_length AS filmLength, film_cats AS filmCats, film_language AS filmType
+       FROM mooc_hall_film_info_t WHERE film_id = ${filmId}
+    </select>
 
 </mapper>

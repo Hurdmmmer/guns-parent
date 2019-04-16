@@ -6,6 +6,7 @@ import com.stylefeng.guns.api.film.model.*;
 import com.stylefeng.guns.rest.modular.film.vo.FilmConditionVo;
 import com.stylefeng.guns.rest.modular.film.vo.FilmIndexVo;
 import com.stylefeng.guns.rest.modular.vo.ResponseVo;
+import com.stylefeng.guns.rest.utils.MeetingKit;
 import org.springframework.web.bind.annotation.*;
 
 import java.lang.reflect.Field;
@@ -42,11 +43,11 @@ public class FilmController {
                                         @RequestParam(value = "sourceId", required = false, defaultValue = "99") String sourceId,
                                         @RequestParam(value = "yearId", required = false, defaultValue = "99") String yearId) throws IllegalAccessException {
         List<CatVo> cats = this.filmServiceAPI.getCats(99);
-        generateActive(cats, catId);
+        MeetingKit.generateActive(cats, catId);
         List<SourceVo> source = this.filmServiceAPI.getSource(99);
-        generateActive(source, sourceId);
+        MeetingKit.generateActive(source, sourceId);
         List<YearVo> years = this.filmServiceAPI.getYears(99);
-        generateActive(years, yearId);
+        MeetingKit.generateActive(years, yearId);
 
 
         FilmConditionVo filmConditionVo = new FilmConditionVo();
@@ -57,49 +58,7 @@ public class FilmController {
     }
 
 
-    private <T> List<T> generateActive(List<T> resource, String idStr) throws IllegalAccessException {
-        int index = -1;
-        for (int i = 0; i < resource.size(); i++) {
-            T obj = resource.get(i);
-            Map<String, Field> map = getField(obj);
-            Field id = map.get("id");
-            Field active = map.get("active");
-            id.setAccessible(true);
-            active.setAccessible(true);
 
-            String idValue = (String) id.get(obj);
-            T tmp = null;
-            if (idValue.equals("99")) {
-                tmp = obj;
-            }
-            if (idValue.equals(idStr)) {
-                index = i;
-                active.setBoolean(obj, true);
-            }
-            if (index == -1 && (i + 1) == resource.size() && tmp != null) {
-                getField(tmp).get("active").setBoolean(tmp, true);
-            }
-
-        }
-
-        return resource;
-    }
-
-    private Map<String, Field> getField(Object obj) {
-        Class<?> clazz = obj.getClass();
-        Field[] fields = clazz.getDeclaredFields();
-        Map<String, Field> map = new HashMap<>();
-        for (Field field : fields) {
-            field.setAccessible(true);
-            if (field.getName().indexOf("Id") > 0) {
-                map.put("id", field);
-            }
-            if (field.getName().indexOf("Active") > 0) {
-                map.put("active", field);
-            }
-        }
-        return map;
-    }
 
     @GetMapping("/getFilms")
     public ResponseVo getFilms(@RequestParam(value = "showType", required = false, defaultValue = "1") Integer showType,
