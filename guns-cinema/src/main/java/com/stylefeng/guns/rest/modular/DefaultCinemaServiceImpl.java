@@ -161,7 +161,7 @@ public class DefaultCinemaServiceImpl implements CinemaServiceApi {
         MoocHallDictT moocHallDictT = this.moocHallDictTMapper.selectById(moocFieldT.getHallId());
 
         HallInfoVo hallInfoVo = new HallInfoVo();
-        hallInfoVo.setSoldSeats("1,3,4,8");
+
         hallInfoVo.setSeatFile(moocHallDictT.getSeatAddress());
         hallInfoVo.setPrice(moocFieldT.getPrice() + "");
         return hallInfoVo;

@@ -66,6 +66,8 @@ public class CinemaController {
 
         CinemaInfoVo cinemaInfo = this.cinemaServiceApi.getCinemaInfo(cinemaId);
         HallInfoVo hallInfo = this.cinemaServiceApi.getHallInfo(cinemaId, fieldId);
+        // todo 假的销售数据, 后续对接订单模块
+        hallInfo.setSoldSeats("1,3,4,8");
         FilmInfoVo filmInfoVo = this.cinemaServiceApi.getFilmBy(cinemaId, fieldId);
         Map<String, Object> map = new HashMap<>();
         map.put("filmInfo", filmInfoVo);
