@@ -294,4 +294,19 @@ public class DefaultFilmServiceIml implements FilmServiceAPI {
         filmDescVo.setImgs(imgVo);
         return filmDescVo;
     }
+
+    @Override
+    public FilmInfo getFilmInfo(Integer filmId) {
+        MoocFilmT moocFilmT = this.moocFilmTMapper.selectById(filmId);
+        FilmInfo filmInfo = new FilmInfo();
+        filmInfo.setImgAddress(moocFilmT.getImgAddress());
+        filmInfo.setFilmType(moocFilmT.getFilmType());
+        filmInfo.setFilmScore(moocFilmT.getFilmScore());
+        filmInfo.setFilmName(moocFilmT.getFilmName());
+        filmInfo.setFilmId(moocFilmT.getUuid()+"");
+        filmInfo.setBoxNum(moocFilmT.getFilmBoxOffice());
+        filmInfo.setExpectNum(moocFilmT.getFilmPresalenum());
+        filmInfo.setShowTime(DateUtil.getDay(moocFilmT.getFilmTime()));
+        return filmInfo;
+    }
 }

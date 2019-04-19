@@ -1,5 +1,6 @@
 package com.stylefeng.guns.rest.common.persistence.dao;
 
+import com.stylefeng.guns.api.cinema.model.FilmFieldVo;
 import com.stylefeng.guns.api.film.model.FilmDetailVo;
 import com.stylefeng.guns.rest.common.persistence.model.MoocFilmT;
 import com.baomidou.mybatisplus.mapper.BaseMapper;

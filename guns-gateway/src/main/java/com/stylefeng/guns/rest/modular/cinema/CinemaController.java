@@ -3,6 +3,7 @@ package com.stylefeng.guns.rest.modular.cinema;
 import com.alibaba.dubbo.config.annotation.Reference;
 import com.stylefeng.guns.api.cinema.CinemaServiceApi;
 import com.stylefeng.guns.api.cinema.model.*;
+import com.stylefeng.guns.api.order.OrderServiceApi;
 import com.stylefeng.guns.rest.modular.cinema.vo.CinemaConditionVo;
 import com.stylefeng.guns.rest.modular.cinema.vo.CinemaDetailVo;
 import com.stylefeng.guns.rest.modular.cinema.vo.CinemaRequestVo;
@@ -20,6 +21,9 @@ public class CinemaController {
 
     @Reference(interfaceClass = CinemaServiceApi.class)
     private CinemaServiceApi cinemaServiceApi;
+
+    @Reference(interfaceClass = OrderServiceApi.class)
+    private OrderServiceApi orderServiceApi;
 
     @GetMapping("/getCinemas")
     public ResponseVo getCinemas(CinemaRequestVo cinemaRequestVo) {
@@ -66,9 +70,10 @@ public class CinemaController {
 
         CinemaInfoVo cinemaInfo = this.cinemaServiceApi.getCinemaInfo(cinemaId);
         HallInfoVo hallInfo = this.cinemaServiceApi.getHallInfo(cinemaId, fieldId);
-        // todo 假的销售数据, 后续对接订单模块
-        hallInfo.setSoldSeats("1,3,4,8");
-        FilmInfoVo filmInfoVo = this.cinemaServiceApi.getFilmBy(cinemaId, fieldId);
+        // 查询订单接口获取销售的座位
+        String ids = this.orderServiceApi.getSoldSeatsByFiledId(fieldId + "");
+        hallInfo.setSoldSeats(ids);
+        FilmInfoVo filmInfoVo = this.cinemaServiceApi.getFilmBy(fieldId);
         Map<String, Object> map = new HashMap<>();
         map.put("filmInfo", filmInfoVo);
         map.put("cinemaInfo", cinemaInfo);

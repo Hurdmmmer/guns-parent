@@ -16,5 +16,56 @@
         <result column="order_user" property="orderUser" />
         <result column="order_status" property="orderStatus" />
     </resultMap>
+    <select id="getFieldSeatsPath" resultType="java.lang.String" parameterType="java.lang.Integer">
+        select
+          seat_address as seatAddress
+        from
+          mooc_hall_dict_t t,
+          mooc_field_t f
+        where
+          f.hall_id = t.uuid
+          and
+          f.uuid = ${fieldId}
+    </select>
+    <select id="getSoldSeatsIds" resultType="com.stylefeng.guns.rest.common.persistence.model.MoocOrderT">
+        SELECT
+            o.`UUID`  as uuid,
+            o.`cinema_id` as cinemaId,
+            o.`field_id` as fieldId,
+            o.`film_id` as filmId,
+            o.`seats_ids` as seatsIds,
+            o.`seats_name` as seatsName,
+            o.`film_price` as filmPrice,
+            o.`order_price` as orderPrice,
+            o.`order_time` as orderTime,
+            o.`order_user` as orderUser,
+            o.`order_status` as orderStatus
 
+        FROM
+            mooc_field_t t,
+            mooc_order_t o
+        WHERE
+            t.film_id = o.film_id
+            AND t.cinema_id = o.cinema_id
+            AND t.uuid = ${fieldId}
+    </select>
+    <select id="selectByOrderUser" resultMap="BaseResultMap">
+      SELECT
+        *
+      FROM
+        mooc_order_t t
+      WHERE
+        t.order_user = #{userId}
+
+    </select>
+    <select id="getFieldInfo" resultType="com.stylefeng.guns.api.cinema.model.FilmFieldVo">
+      select
+        t.`UUID` as fieldId,
+        t.`begin_time` as beginTime,
+        t.`end_time` as endTime
+      from
+        mooc_field_t t
+      where
+        t.uuid = ${fieldId}
+    </select>
 </mapper>

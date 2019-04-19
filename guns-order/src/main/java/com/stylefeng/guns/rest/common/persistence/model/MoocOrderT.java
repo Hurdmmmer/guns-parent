@@ -4,6 +4,8 @@ import java.util.Date;
 import com.baomidou.mybatisplus.annotations.TableField;
 import com.baomidou.mybatisplus.activerecord.Model;
 import com.baomidou.mybatisplus.annotations.TableName;
+import lombok.Builder;
+
 import java.io.Serializable;
 
 /**
@@ -15,6 +17,7 @@ import java.io.Serializable;
  * @since 2019-04-17
  */
 @TableName("mooc_order_t")
+@Builder
 public class MoocOrderT extends Model<MoocOrderT> {
 
     private static final long serialVersionUID = 1L;

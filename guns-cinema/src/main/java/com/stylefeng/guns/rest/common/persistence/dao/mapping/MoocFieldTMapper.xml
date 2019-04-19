@@ -13,15 +13,13 @@
         <result column="hall_name" property="hallName" />
         <result column="price" property="price" />
     </resultMap>
-    <select id="getMoocFieldTByFieldIdAndCinemaId" resultMap="BaseResultMap">
+    <select id="getMoocFieldTByFieldId" resultMap="BaseResultMap">
       SELECT
         *
       FROM
         mooc_field_t
       WHERE
        UUID = ${fieldId}
-       AND
-       cinema_id = ${cinemaId}
     </select>
 
 </mapper>

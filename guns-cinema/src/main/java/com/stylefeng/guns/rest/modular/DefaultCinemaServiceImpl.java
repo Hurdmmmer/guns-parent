@@ -153,8 +153,8 @@ public class DefaultCinemaServiceImpl implements CinemaServiceApi {
     }
 
     @Override
-    public HallInfoVo getHallInfo(Integer cinemaId, Integer fieldId) {
-        MoocFieldT moocFieldT = this.moocFieldTMapper.getMoocFieldTByFieldIdAndCinemaId(fieldId, cinemaId);
+    public HallInfoVo getHallInfo( Integer fieldId) {
+        MoocFieldT moocFieldT = this.moocFieldTMapper.getMoocFieldTByFieldId(fieldId);
         if (moocFieldT == null) {
             return null;
         }
@@ -164,12 +164,13 @@ public class DefaultCinemaServiceImpl implements CinemaServiceApi {
 
         hallInfoVo.setSeatFile(moocHallDictT.getSeatAddress());
         hallInfoVo.setPrice(moocFieldT.getPrice() + "");
+        hallInfoVo.setCinemaId(moocFieldT.getCinemaId());
         return hallInfoVo;
     }
 
     @Override
-    public FilmInfoVo getFilmBy(Integer cinemaId, Integer fieldId) {
-        MoocFieldT moocFieldT = this.moocFieldTMapper.getMoocFieldTByFieldIdAndCinemaId(fieldId, cinemaId);
+    public FilmInfoVo getFilmBy(Integer fieldId) {
+        MoocFieldT moocFieldT = this.moocFieldTMapper.getMoocFieldTByFieldId(fieldId);
         if (moocFieldT == null) {
             return null;
         }

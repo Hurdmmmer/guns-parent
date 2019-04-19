@@ -36,10 +36,10 @@ public interface CinemaServiceApi {
     /**
      * 查询电影场次详情
      */
-    HallInfoVo getHallInfo(Integer cinemaId, Integer fieldId);
+    HallInfoVo getHallInfo(Integer fieldId);
 
     /**
      * 根据影院和场次ID查询电影信息 |
      */
-    FilmInfoVo getFilmBy(Integer cinemaId, Integer fieldId);
+    FilmInfoVo getFilmBy(Integer fieldId);
 }

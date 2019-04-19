@@ -56,4 +56,6 @@ public interface FilmServiceAPI {
 
     FilmDescVo getFilmDesc(String uuid);
 
+    FilmInfo getFilmInfo(Integer filmId);
+
 }

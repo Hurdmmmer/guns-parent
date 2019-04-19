@@ -13,5 +13,5 @@ import org.apache.ibatis.annotations.Param;
  * @since 2019-04-12
  */
 public interface MoocFieldTMapper extends BaseMapper<MoocFieldT> {
-    MoocFieldT getMoocFieldTByFieldIdAndCinemaId(@Param("fieldId") Integer fieldId, @Param("cinemaId") Integer cinemaId);
+    MoocFieldT getMoocFieldTByFieldId(@Param("fieldId") Integer fieldId);
 }

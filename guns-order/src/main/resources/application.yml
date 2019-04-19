@@ -25,13 +25,18 @@ spring:
       address: zookeeper://127.0.0.1:2181
     protocol: # dubbo 传输协议
       name: dubbo
-      port: 20882  # 提供服务端口
+      port: 20885  # 提供服务端口
   datasource:
       url: jdbc:mysql://192.168.72.79:3307/guns_rest?useUnicode=true&characterEncoding=UTF-8
       username: root
       password: 123456
       filters: log4j,wall,mergeStat
 
+ftp:
+  ip: 192.168.72.79
+  port: 21
+  username: ftptest
+  password: qwsyj222
 logging:
   level.root: info
   level.com.stylefeng: debug

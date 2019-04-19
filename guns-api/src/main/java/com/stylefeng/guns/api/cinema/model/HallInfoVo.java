@@ -8,6 +8,7 @@ import java.io.Serializable;
 public class HallInfoVo implements Serializable {
     private Integer hallFieldId;
     private String hallName;
+    private Integer cinemaId;
     private String price;
     /** 影厅座位排列  */
     private String seatFile;
